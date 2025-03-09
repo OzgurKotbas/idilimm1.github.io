@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şifre Girişi</title>
+    <style>
+        body {
+            background-color: #f4c6d7; /* Pastel pembe arka plan */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #login-form {
+            background-color: rgba(255, 255, 255, 0.7); /* Şeffaf beyaz arka plan */
+            padding: 30px 70px 30px 30px; /* Sağ tarafa ekstra 15px padding ekledik */
+            border-radius: 10px;
+            text-align: center;
+            width: 300px; /* Formun genişliği */
+            position: relative;
+        }
+
+        #login-form h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #password {
+            width: 100%; /* Genişliği %100 yaparak form ile aynı uzunlukta yapıyoruz */
+            padding: 15px 20px; /* İçerik için eşit mesafe */
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Şeffaf kutu */
+        }
+
+        button {
+            width: 100%; /* Butonun genişliği de %100 olacak */
+            padding: 15px;
+            font-size: 18px;
+            background-color: #ff8ca7; /* Pastel pembe buton */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #ff6b81; /* Hover durumunda biraz koyulaşma */
+        }
+    </style>
+</head>
+ 
+<link rel="icon" type="image/png" href="resimler/kilit.ico">
+
+<body>
+    <div id="login-form">
+        <h2>Şifreyi girin</h2>
+        <input type="password" id="password" placeholder="Şifreyi girin" required>
+        <button onclick="checkPassword()">Giriş Yap</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById('password').value;
+            var correctPassword = '152210';  // Doğru şifre
+
+            if (password === correctPassword) {
+                // Şifre doğruysa, içeriğe yönlendir
+                window.location.href = "anasayfa.html";  // İçerik sayfasına yönlendir
+            } else {
+                alert('Hatalı şifre!');
+            }
+        }
+    </script>
+</body>
+</html>

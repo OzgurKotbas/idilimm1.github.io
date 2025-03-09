@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background-image: url(resimler/Dg7.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0;
+                height: 100vh; /* Sayfa boyutuna uyumlu hale getirir */
+                display: flex;
+                justify-content: flex-end; /* Sağda hizalama */
+                align-items: center; /* Ortada dikey hizalama */
+                padding: 0 20px; /* Telefonlarda kenarlardan boşluk bırakmak için */
+                box-sizing: border-box;
+            }
+
+            /* Konteyner kutusu */
+            .links-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Kutuları ortalar */
+                gap: 20px; /* Kutular arasına mesafe ekler */
+                width: 7%;
+                max-width: 300px; /* Kutuları sınırlamak için */
+            }
+
+            /* Her bir link kutusu */
+            .link-box {
+                background-color: rgba(219, 219, 191, 0.7); /* Arka plan rengi biraz daha koyu */
+                padding: 15px 25px;
+                border-radius: 8px;
+                text-align: center;
+                transition: transform 0.3s ease-in-out; /* Büyüme efekti için geçiş */
+                width: 100%;
+            }
+
+            /* Linklerin stilini ayarlıyoruz */
+            .link-box a {
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                display: block;
+            }
+
+            /* Fareyle üzerine gelindiğinde büyüme efekti */
+            .link-box:hover {
+                transform: scale(1.1); /* 10% büyütme */
+            }
+
+            /* Mobil cihazlar için responsive ayar */
+            @media (max-width: 600px) {
+                .link-box {
+                    font-size: 14px; /* Telefon ekranlarında daha küçük yazı */
+                    padding: 10px 20px; /* Mobilde daha küçük padding */
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Linklerin bulunduğu konteyner -->
+        <div class="links-container">
+            <div class="link-box">
+                <a href="galeri.html">Galeri</a>
+            </div>
+            <div class="link-box">
+                <a href="dosya2.html">Dosya 2</a>
+            </div>
+            <div class="link-box">
+                <a href="dosya3.html">Dosya 3</a>
+            </div>
+        </div>
+    </body>
+</html>

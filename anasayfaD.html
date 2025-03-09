@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <link rel="apple-touch-icon" sizes="32x32" href="resimler/32x32.ico">
+        <link rel="apple-touch-icon" sizes="57x57" href="resimler/57x57.ico">
+        <link rel="apple-touch-icon" sizes="72x72" href="resimler/72x72.ico">
+        <link rel="apple-touch-icon" sizes="114x114" href="resimler/114x114.ico">
+        <link rel="apple-touch-icon" sizes="144x144" href="resimler/144x144.ico">
+        <link rel="icon" type="image/png" sizes="192x192" href="resimler/192x192.ico">
+        
+        <meta charset="utf-8">
+        <style>
+            body {
+                background-image: url(resimler/Dg7.png);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin: 0;
+                height: 100vh; /* Sayfa boyutuna uyumlu hale getirir */
+                display: flex;
+                justify-content: flex-end; /* Sağda hizalama */
+                align-items: center; /* Ortada dikey hizalama */
+                padding-right: 30px;
+            }
+
+            /* Konteyner kutusu */
+            .links-container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end; /* Kutuları sağa hizalar */
+                gap: 20px; /* Kutular arasına mesafe ekler */
+            }
+
+            /* Her bir link kutusu */
+            .link-box {
+                background-color: rgba(219, 219, 191, 0.5); /* Arka plan rengi biraz daha koyu */
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-align: center;
+                transition: transform 0.3s ease-in-out; /* Büyüme efekti için geçiş */
+            }
+
+            /* Linklerin stilini ayarlıyoruz */
+            .link-box a {
+                color: white;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+            /* Fareyle üzerine gelindiğinde büyüme efekti */
+            .link-box:hover {
+                transform: scale(1.1); /* 10% büyütme */
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Linklerin bulunduğu konteyner -->
+        <div class="links-container">
+            <div class="link-box">
+                <a href="dosya1.html">Dosya 1</a>
+            </div>
+            <div class="link-box">
+                <a href="dosya2.html">Dosya 2</a>
+            </div>
+            <div class="link-box">
+                <a href="dosya3.html">Dosya 3</a>
+            </div>
+        </div>
+    </body>
+</html>

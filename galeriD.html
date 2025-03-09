@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="apple-touch-icon" sizes="32x32" href="resimler/32x32(1).ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="resimler/57x57(1).ico">
+    <link rel="apple-touch-icon" sizes="72x72" href="resimler/72x72(1).ico">
+    <link rel="apple-touch-icon" sizes="114x114" href="resimler/114x114(1).ico">
+    <link rel="icon" type="image/png" sizes="256x356" href="resimler/256x256.ico">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mini Oyun </title>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+    background-image: url(resimler/GALERİMİZZ\ \(4\).png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 100vh; /* Sayfa boyutuna uyumlu hale getirir */
+    display: flex;
+    flex-direction: column; /* İçerikleri dikey olarak yerleştirir */
+    justify-content: space-between; /* İçeriği üst kısma, footer'ı alt kısma yerleştirir */
+    padding: 20px;
+    box-sizing: border-box;
+    }
+
+
+        /* Konteyner kutusu */
+    .links-container {
+        display: flex;
+        flex-direction: row; /* Linkleri yan yana yerleştirir */
+        gap: 30px; /* Linkler arasına mesafe ekler */
+        justify-content: center; /* Linkleri yatayda ortalar */
+        align-items: center; /* Linkleri dikeyde ortalar */
+        position: absolute;
+        top: 0; /* Sayfanın üst kısmına yerleştirir */
+        left: 50%; /* Sayfanın ortasına yerleştirir */
+        transform: translateX(-50%); /* Tam olarak ortalamak için kullanılır */
+        padding: 10px 0; /* Üst ve alt kısmına padding ekler */
+    }
+
+
+        /* Her bir link kutusu */
+        .link-box {
+            background-color: #2c2e3f; /* Arka plan rengini güncelledik */
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out; /* Büyüme efekti için geçiş */
+        }
+
+        /* Linklerin stilini ayarlıyoruz */
+        .link-box a {
+            color: white;
+            text-decoration: none;
+            font-size: 9px; /* Bağlantı yazı boyutunu küçültüyoruz */
+            display: block;
+        }
+
+        /* Fareyle üzerine gelindiğinde büyüme efekti */
+        .link-box:hover {
+            transform: scale(1.1); /* 10% büyütme */
+        }
+
+        /* Mobil cihazlar için responsive ayar */
+        @media (max-width: 600px) {
+            .link-box {
+                font-size: 12px; /* Telefon ekranlarında daha küçük yazı */
+                padding: 8px 16px; /* Mobilde daha küçük padding */
+            }
+            .gallery-item {
+                width: calc(100vw / 5); /* Küçük ekranlarda daha büyük öğeler */
+                height: calc(100vh / 4); /* Küçük ekranlarda daha büyük öğeler */
+            }
+        }
+
+        h1 {
+            color: white;
+            font-size: 50px;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 0; /* Başlık ile boşlukları sıfırlayalım */
+            padding-bottom: 10px;
+        }
+
+        .links a {
+            display: block;
+            color: white; /* Link rengini beyaz yapalım */
+            font-size: 9px; /* Bağlantı yazı boyutunu küçültüyoruz */
+            text-decoration: none; /* Alt çizgiyi kaldırdık */
+            padding: 20px;
+            margin: 0 15px;
+            background-color: #5b1c8e; /* Kutu rengi */
+            border-radius: 10px;
+            text-align: center;
+            width: 150px; /* Kutu genişliği */
+            transition: all 0.3s ease; /* Büyüme efekti için geçiş */
+        }
+
+        .links a:hover {
+            background-color: #4a1579; /* Mouse ile gelindiğinde koyulaşacak renk */
+            transform: scale(1.1); /* Büyüme efekti */
+        }
+
+        /* Galeri ve diğer içerikleri ayarlayalım */
+        .gallery {
+          display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Fotoğraflar arasına eşit boşluk bırakır */
+            margin-top: 80px; /* Linklerin altından biraz boşluk bırakalım */
+            justify-content: center; /* Fotoğrafları yatayda ortalar */
+            align-items: center; /* Fotoğrafları dikeyde ortalar */
+        }
+
+        /* Galeri öğesinin stilini ayarlayalım */
+        .gallery-item { 
+            width: calc(100vw / 15); /* Her öğe genişliği, sayfa genişliğinin 15'te biri olacak */
+             height: calc(100vh / 5); /* Her öğe yüksekliği, sayfa yüksekliğinin 5'te biri olacak */
+            margin-bottom: 20px; /* Alt kısımda boşluk bırakır */
+             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Galeri öğesinin içindeki görsel ve video stilini ayarlayalım */
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%; /* İçerik, öğe genişliğine uyar */
+            height: 100%; /* İçerik, öğe yüksekliğine uyar */
+            object-fit: cover; /* Görsellerin düzgün görünmesini sağlar */
+            border-radius: 8px; /* Yuvarlatılmış köşeler */
+        }
+
+        /* Lightbox içeriği */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: hidden;
+        }
+
+        .lightbox img, .lightbox video {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        footer {
+             margin-top: auto; /* Sayfanın altına itme */
+            text-align: center;
+                color: white;
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    
+</header>
+
+<!-- Bağlantılar -->
+<div class="links-container">
+    <div class="link-box">
+        <a href="index.html">Anasayfa</a>
+    </div>
+    <div class="link-box">
+        <a href="mesaj.html">Dg kızına minik bir mesaj</a>
+    </div>
+</div>
+
+<div class="gallery">
+    <!-- Fotoğraf galerisi -->
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri1.jpg', 2, 'image')">
+        <img src="resimler2/galeri1.jpg" alt="Fotoğraf 1">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri2.jpg', 3, 'image')">
+        <img src="resimler2/galeri2.jpg" alt="Fotoğraf 2">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri3.jpg', 4, 'image')">
+        <img src="resimler2/galeri3.jpg" alt="Fotoğraf 3">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri4.jpg', 5, 'image')">
+        <img src="resimler2/galeri4.jpg" alt="Fotoğraf 4">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri5.jpg', 6, 'image')">
+        <img src="resimler2/galeri5.jpg" alt="Fotoğraf 5">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri6.jpg', 7, 'image')">
+        <img src="resimler2/galeri6.jpg" alt="Fotoğraf 6">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri7.jpg', 8, 'image')">
+        <img src="resimler2/galeri7.jpg" alt="Fotoğraf 7">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri8.jpg', 9, 'image')">
+        <img src="resimler2/galeri8.jpg" alt="Fotoğraf 8">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri9.jpg', 10, 'image')">
+        <img src="resimler2/galeri9.jpg" alt="Fotoğraf 9">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri10.jpg', 11, 'image')">
+        <img src="resimler2/galeri10.jpg" alt="Fotoğraf 10">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri11.jpg', 12, 'image')">
+        <img src="resimler2/galeri11.jpg" alt="Fotoğraf 11">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri12.jpg', 13, 'image')">
+        <img src="resimler2/galeri12.jpg" alt="Fotoğraf 12">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri13.jpg', 14, 'image')">
+        <img src="resimler2/galeri13.jpg" alt="Fotoğraf 13">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri14.jpg', 15, 'image')">
+        <img src="resimler2/galeri14.jpg" alt="Fotoğraf 14">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri15.jpg', 16, 'image')">
+        <img src="resimler2/galeri15.jpg" alt="Fotoğraf 15">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri16.jpg', 17, 'image')">
+        <img src="resimler2/galeri16.jpg" alt="Fotoğraf 16">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri17.jpg', 18, 'image')">
+        <img src="resimler2/galeri17.jpg" alt="Fotoğraf 17">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri18.jpg', 19, 'image')">
+        <img src="resimler2/galeri18.jpg" alt="Fotoğraf 18">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri19.jpg', 20, 'image')">
+        <img src="resimler2/galeri19.jpg" alt="Fotoğraf 19">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri20.jpg', 21, 'image')">
+        <img src="resimler2/galeri20.jpg" alt="Fotoğraf 20">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri21.jpg', 22, 'image')">
+        <img src="resimler2/galeri21.jpg" alt="Fotoğraf 21">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri22.jpg', 23, 'image')">
+        <img src="resimler2/galeri22.jpg" alt="Fotoğraf 22">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri23.jpg', 24, 'image')">
+        <img src="resimler2/galeri23.jpg" alt="Fotoğraf 23">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri24.jpg', 25, 'image')">
+        <img src="resimler2/galeri24.jpg" alt="Fotoğraf 24">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri25.jpg', 26, 'image')">
+        <img src="resimler2/galeri25.jpg" alt="Fotoğraf 25">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri26.jpg', 27, 'image')">
+        <img src="resimler2/galeri26.jpg" alt="Fotoğraf 26">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri27.jpg', 28, 'image')">
+        <img src="resimler2/galeri27.jpg" alt="Fotoğraf 27">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri28.jpg', 29, 'image')">
+        <img src="resimler2/galeri28.jpg" alt="Fotoğraf 28">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri29.jpg', 30, 'image')">
+        <img src="resimler2/galeri29.jpg" alt="Fotoğraf 29">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri30.png', 31, 'image')">
+        <img src="resimler2/galeri30.png" alt="Fotoğraf 30">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri31.png', 32, 'image')">
+        <img src="resimler2/galeri31.png" alt="Fotoğraf 31">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri32.png', 33, 'image')">
+        <img src="resimler2/galeri32.png" alt="Fotoğraf 32">
+    </div>
+    
+    <div class="gallery-item" onclick="openLightbox('resimler2/galeri33.jpg', 34, 'image')">
+        <img src="resimler2/galeri33.png" alt="Fotoğraf 33">
+    </div>
+    
+
+
+
+
+    <!-- Video galerisi -->
+    <div class="gallery-item" onclick="openLightbox('resimler2/video1.mp4', 1, 'video')">
+        <img src="resimler2/video1.mp4" alt="Video 1">
+    </div>
+</div>
+
+<!-- Lightbox popup -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <button class="back-btn" onclick="backToGallery()">←</button>
+        <button class="close-btn" onclick="closeLightbox()">X</button>
+        <button class="prev-btn" onclick="changeMedia(-1)">←</button>
+        <button class="next-btn" onclick="changeMedia(1)">→</button>
+
+        <img id="lightbox-img" src="" alt="Büyütülmüş Görsel">
+        <video id="lightbox-video" controls>
+            <source src="" type="video/mp4">
+            Tarayıcınız video oynatmayı desteklemiyor.
+        </video>
+    </div>
+</div>
+
+<footer>
+    <p>Biriciğim için bir mini oyun yapmak istedim. Şimdi ilk amacım galeri yapmaktı ama fotolarını yüklememi istemeyebilirsin diye düşündüm. Ben de bir mini oyun tasarlim dedim :)</p>
+    <p>Oyunun amacı kırpılmış fotoğrafların orijinallerini bulmak. Gayet kolay gibi görünse de bazı zor fotoğraflar da var :))</p>
+    <p>Başarılar bi tanemmm🩷🩷🩷🩷</p>
+    <p>(Minik bi ipucu verim genel olarak buluşmalarımızdan fotolar seçtim.)</p>
+</footer>
+
+<script>
+    var mediaList = [
+    { src: 'resimler2/galeri1.jpg', type: 'image' },
+    { src: 'resimler2/galeri2.jpg', type: 'image' },
+    { src: 'resimler2/galeri3.jpg', type: 'image' },
+    { src: 'resimler2/galeri4.jpg', type: 'image' },
+    { src: 'resimler2/galeri5.jpg', type: 'image' },
+    { src: 'resimler2/galeri6.jpg', type: 'image' },
+    { src: 'resimler2/galeri7.jpg', type: 'image' },
+    { src: 'resimler2/galeri8.jpg', type: 'image' },
+    { src: 'resimler2/galeri9.jpg', type: 'image' },
+    { src: 'resimler2/galeri10.jpg', type: 'image' },
+    { src: 'resimler2/galeri11.jpg', type: 'image' },
+    { src: 'resimler2/galeri12.jpg', type: 'image' },
+    { src: 'resimler2/galeri13.jpg', type: 'image' },
+    { src: 'resimler2/galeri14.jpg', type: 'image' },
+    { src: 'resimler2/galeri15.jpg', type: 'image' },
+    { src: 'resimler2/galeri16.jpg', type: 'image' },
+    { src: 'resimler2/galeri17.jpg', type: 'image' },
+    { src: 'resimler2/galeri18.jpg', type: 'image' },
+    { src: 'resimler2/galeri19.jpg', type: 'image' },
+    { src: 'resimler2/galeri20.jpg', type: 'image' },
+    { src: 'resimler2/galeri21.jpg', type: 'image' },
+    { src: 'resimler2/galeri22.jpg', type: 'image' },
+    { src: 'resimler2/galeri23.jpg', type: 'image' },
+    { src: 'resimler2/galeri24.jpg', type: 'image' },
+    { src: 'resimler2/galeri25.jpg', type: 'image' },
+    { src: 'resimler2/galeri26.jpg', type: 'image' },
+    { src: 'resimler2/galeri27.jpg', type: 'image' },
+    { src: 'resimler2/galeri28.jpg', type: 'image' },
+    { src: 'resimler2/galeri29.jpg', type: 'image' },
+    { src: 'resimler2/galeri30.png', type: 'image' },
+    { src: 'resimler2/galeri31.png', type: 'image' },
+    { src: 'resimler2/galeri32.png', type: 'image' },
+    { src: 'resimler2/galeri33.png', type: 'image' },
+    {src: 'resimler2/video1.mp4', type: 'video'}
+];
+
+
+    var currentIndex = 0;
+    var currentType = 'image'; // Başlangıçta image
+
+    // Lightbox'ı açma fonksiyonu
+    function openLightbox(src, index, type) {
+        var lightbox = document.getElementById('lightbox');
+        var img = document.getElementById('lightbox-img');
+        var video = document.getElementById('lightbox-video');
+
+        currentIndex = index;
+        currentType = type;
+
+        if (type === 'video') {
+            img.style.display = 'none';
+            video.style.display = 'block';
+            video.src = src;
+        } else {
+            video.style.display = 'none';
+            img.style.display = 'block';
+            img.src = src;
+        }
+
+        lightbox.style.display = 'flex';
+    }
+
+    // Lightbox'ı kapatma fonksiyonu
+    function closeLightbox() {
+        var lightbox = document.getElementById('lightbox');
+        var img = document.getElementById('lightbox-img');
+        var video = document.getElementById('lightbox-video');
+
+        lightbox.style.display = 'none';
+        img.src = '';
+        video.src = '';
+    }
+
+    // Galeriye geri dönme fonksiyonu
+    function backToGallery() {
+        var lightbox = document.getElementById('lightbox');
+        lightbox.style.display = 'none';
+    }
+
+    // Sayfaya başa dönme fonksiyonu
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Yumuşak kaydırma efekti
+        });
+    }
+
+    // Önceki veya sonraki görsel/video değiştirme fonksiyonu
+    function changeMedia(direction) {
+        currentIndex += direction;
+
+        if (currentIndex < 0) {
+            currentIndex = mediaList.length - 1;
+        } else if (currentIndex >= mediaList.length) {
+            currentIndex = 0;
+        }
+
+        var newMedia = mediaList[currentIndex];
+        openLightbox(newMedia.src, currentIndex, newMedia.type);
+    }
+</script>
+
+</body>
+</html>
